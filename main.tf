@@ -53,6 +53,7 @@ module "nat-gateway" {
   zone                  = "${local.zone}"
   network               = "${var.network}"
   subnetwork            = "${var.subnetwork}"
+  subnetwork_project    = "${var.network_project == "" ? var.project : var.network_project}"
   target_tags           = ["${local.instance_tags}"]
   instance_labels       = "${var.instance_labels}"
   service_account_email = "${var.service_account_email}"
