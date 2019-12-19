@@ -39,7 +39,7 @@ data "google_compute_address" "default" {
 locals {
   zone          = "${var.zone == "" ? lookup(var.region_params["${var.region}"], "zone") : var.zone}"
   name          = "${var.name}nat-gateway-${local.zone}"
-  instance_tags = ["inst-${local.zonal_tag}", "inst-${local.regional_tag}"]
+  instance_tags = ["${var.tag_preffix}-inst-${local.zonal_tag}", "${tag_preffix}-inst-${local.regional_tag}"]
   zonal_tag     = "${var.name}nat-${local.zone}"
   regional_tag  = "${var.name}nat-${var.region}"
 }
@@ -89,32 +89,6 @@ module "nat-gateway" {
       nat_ip = "${element(concat(google_compute_address.default.*.address, data.google_compute_address.default.*.address, list("")), 0)}"
     },
   ]
-}
-
-resource "google_compute_route" "nat-gateway" {
-  count                  = "${var.module_enabled ? 1 : 0}"
-  name                   = "${local.zonal_tag}"
-  project                = "${var.network_project == "" ? var.project : var.network_project}"
-  dest_range             = "${var.dest_range}"
-  network                = "${data.google_compute_network.network.self_link}"
-  next_hop_instance      = "${element(split("/", element(module.nat-gateway.instances[0], 0)), 10)}"
-  next_hop_instance_zone = "${local.zone}"
-  tags                   = ["${compact(concat(list("${local.regional_tag}", "${local.zonal_tag}"), var.tags))}"]
-  priority               = "${var.route_priority}"
-}
-
-resource "google_compute_firewall" "nat-gateway" {
-  count   = "${var.module_enabled ? 1 : 0}"
-  name    = "${local.zonal_tag}"
-  network = "${var.network}"
-  project = "${var.network_project == "" ? var.project : var.network_project}"
-
-  allow {
-    protocol = "all"
-  }
-
-  source_tags = ["${compact(concat(list("${local.regional_tag}", "${local.zonal_tag}"), var.tags))}"]
-  target_tags = ["${compact(concat(local.instance_tags, var.tags))}"]
 }
 
 resource "google_compute_address" "default" {

@@ -58,15 +58,8 @@ variable ip_address_name {
   default     = ""
 }
 
-variable tags {
-  description = "Additional compute instance network tags to apply route to."
-  type        = "list"
-  default     = []
-}
-
-variable route_priority {
-  description = "The priority for the Compute Engine Route"
-  default     = 800
+variable tag_preffix {
+  description = "Tag preffix to created compute instances."
 }
 
 variable machine_type {
@@ -206,7 +199,3 @@ variable region_params {
   }
 }
 
-variable "dest_range" {
-  description = "The destination IPv4 address range that this route applies to"
-  default     = "0.0.0.0/0"
-}
