@@ -106,7 +106,7 @@ resource "google_compute_firewall" "nat-gateway" {
   count   = "${var.module_enabled ? 1 : 0}"
   name    = "${local.zonal_tag}"
   network = "${var.network}"
-  project = ""${var.network_project == "" ? var.project : var.network_project}"
+  project = "${var.network_project == "" ? var.project : var.network_project}"
 
   allow {
     protocol = "all"
