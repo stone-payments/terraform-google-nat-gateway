@@ -39,7 +39,7 @@ data "google_compute_address" "default" {
 locals {
   zone          = "${var.zone == "" ? lookup(var.region_params["${var.region}"], "zone") : var.zone}"
   name          = "${var.name}nat-gateway-${local.zone}"
-  instance_tags = ["${var.tag_preffix}-inst-${local.zonal_tag}", "${tag_preffix}-inst-${local.regional_tag}"]
+  instance_tags = ["${var.tag_preffix}-inst-${local.zonal_tag}", "${var.tag_preffix}-inst-${local.regional_tag}"]
   zonal_tag     = "${var.name}nat-${local.zone}"
   regional_tag  = "${var.name}nat-${var.region}"
 }
