@@ -17,7 +17,7 @@
 data "template_file" "nat-startup-script" {
   template = "${file("${format("%s/config/startup.sh", path.module)}")}"
 
-  vars {
+  vars = {
     squid_enabled = "${var.squid_enabled}"
     squid_config  = "${var.squid_config}"
     module_path   = "${path.module}"
@@ -53,7 +53,7 @@ module "nat-gateway" {
   network               = "${var.network}"
   subnetwork            = "${var.subnetwork}"
   subnetwork_project    = "${var.network_project == "" ? var.project : var.network_project}"
-  target_tags           = ["${local.instance_tags}"]
+  target_tags           = local.instance_tags
   instance_labels       = "${var.instance_labels}"
   service_account_email = "${var.service_account_email}"
   machine_type          = "${var.machine_type}"
