@@ -45,7 +45,7 @@ locals {
 }
 
 module "nat-gateway" {
-  source                = "https://github.com/stone-payments/terraform-google-managed-instance-group.git?ref=master"
+  source                = "git@github.com:stone-payments/terraform-google-managed-instance-group.git?ref=master"
   version               = "1.1.15"
   module_enabled        = "${var.module_enabled}"
   project               = "${var.project}"
