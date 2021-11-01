@@ -89,24 +89,13 @@ variable squid_config {
 
 variable metadata {
   description = "Metadata to be attached to the NAT gateway instance"
-  type        = "map"
+  type        = map
   default     = {}
-}
-
-variable "ssh_fw_rule" {
-  description = "Whether or not the SSH Firewall Rule should be created"
-  default     = true
-}
-
-variable ssh_source_ranges {
-  description = "Network ranges to allow SSH from"
-  type        = "list"
-  default     = ["0.0.0.0/0"]
 }
 
 variable instance_labels {
   description = "Labels added to instances."
-  type        = "map"
+  type        = map
   default     = {}
 }
 
@@ -115,14 +104,9 @@ variable service_account_email {
   default     = "default"
 }
 
-variable autohealing_enabled {
-  description = "Enable instance autohealing using http health check"
-  default     = false
-}
-
 variable region_params {
   description = "Map of default zones and IPs for each region. Can be overridden using the `zone` and `ip` variables."
-  type        = "map"
+  type        = map
 
   default = {
     asia-east1 = {
