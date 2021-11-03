@@ -1,4 +1,3 @@
-#!/bin/bash -xe
 
 # Enable ip forwarding and nat
 sysctl -w net.ipv4.ip_forward=1
