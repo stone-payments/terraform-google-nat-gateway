@@ -69,7 +69,7 @@ variable machine_type {
 
 variable compute_image {
   description = "Image used for NAT compute VMs."
-  default     = "projects/debian-cloud/global/images/family/debian-9"
+  default     = "projects/debian-cloud/global/images/family/debian-10"
 }
 
 variable ip {
