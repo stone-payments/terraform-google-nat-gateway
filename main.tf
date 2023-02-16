@@ -45,7 +45,7 @@ locals {
 }
 
 module "instance_template" {
-  source                = "https://github.com/terraform-google-modules/terraform-google-vm.git//modules/instance_template?ref=v7.8.0"
+  source                = "git::https://github.com/terraform-google-modules/terraform-google-vm.git//modules/instance_template?ref=v7.8.0"
 
   project_id            = var.project
   subnetwork            = var.subnetwork
@@ -70,7 +70,7 @@ module "instance_template" {
 }
 
 module "nat_gateway_mig" {
-  source                    = "https://github.com/terraform-google-modules/terraform-google-vm.git//modules/mig?ref=v7.8.0"
+  source                    = "git::https://github.com/terraform-google-modules/terraform-google-vm.git//modules/mig?ref=v7.8.0"
 
   project_id                = var.project
   region                    = var.region
